@@ -1,0 +1,46 @@
+import React, { Component } from 'react';
+import Moment from 'react-moment';
+
+class Profilecredi extends Component {
+  render() {
+
+    const { experience, education } = this.props;
+
+    const expitem = experience.map(exp => (<li key={exp._id} className="list-group-item">
+    <h4> {exp.company}</h4>
+    <p>
+      <Moment format="DD/MM/YYYY">{exp.from}</Moment> - {exp.to === null ? (' Now') : 
+    (<Moment format="DD/MM/YYYY">{exp.to}</Moment>)}
+    </p>
+    <p><strong>Position:</strong> {exp.title}</p>
+    <p>{exp.location === '' ? null : (<span><strong>Location:</strong> {exp.location}</span>)}</p>
+    <p>{exp.description === '' ? null : (<span><strong>Description:</strong> {exp.description}</span>)}</p></li>));
+
+      const eduitem = education.map(edu => (<li key={edu._id} className="list-group-item">
+      <h4> {edu.school}</h4>
+      <p>
+        <Moment format="DD/MM/YYYY">{edu.from}</Moment> - {edu.to === null ? (' Now') : 
+      (<Moment format="DD/MM/YYYY">{edu.to}</Moment>)}
+      </p>
+      <p><strong>Degree:</strong> {edu.degree}</p>
+      <p><strong>Field of Study:</strong> {edu.fieldofstudy}</p>
+      <p>{edu.description === '' ? null : (<span><strong>Description:</strong> {edu.description}</span>)}</p></li>))
+    return (
+       <div className="row">
+          <div className="col-md-6">
+            <h3 className="text-center text-info">Experience</h3>
+            {expitem.length > 0 ? (<ul className="list-group">{expitem}</ul>) : 
+            (<p className="text-center">No Experience Listed</p>)}
+          </div>
+
+          <div className="col-md-6">
+            <h3 className="text-center text-info">Education</h3>
+            {eduitem.length > 0 ? (<ul className="list-group">{eduitem}</ul>) : 
+            (<p className="text-center">No Education is Listed</p>)}
+          </div>
+       </div>
+    );
+  }
+}
+
+export default Profilecredi;
